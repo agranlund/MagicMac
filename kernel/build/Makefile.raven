@@ -1,0 +1,25 @@
+
+PCMAKE=../../bin/macos/pcmake
+
+.PHONY: clean en de fr all
+
+en:
+	sed -i '' "s/\(COUNTRY=\)[0-9]/\10/g" raven.prj
+	$(PCMAKE) raven.prj
+	cp mraven.ram en/magic.ram
+
+de:
+	sed -i '' "s/\(COUNTRY=\)[0-9]/\11/g" raven.prj
+	$(PCMAKE) raven.prj
+	cp mraven.ram de/magic.ram
+
+fr:
+	sed -i '' "s/\(COUNTRY=\)[0-9]/\12/g" raven.prj
+	$(PCMAKE) raven.prj
+	cp mraven.ram fr/magic.ram
+
+all: en de fr
+
+clean:
+	rm -f *.o *.pdb ../*/*.o ../*/*/*.o $(PROGRAMS)
+	rm -f *.ram en/*.ram de/*.ram fr/*.ram
